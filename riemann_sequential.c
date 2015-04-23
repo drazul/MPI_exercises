@@ -22,7 +22,13 @@ void create_random_file(char* filename, int problem_size) {
 void read_data_from_file(char* filename, int problem_size, double *data) {
   FILE *fp;
   fp = fopen(filename, "r");
-  float tmp1, tmp2;
+
+  if (fp == NULL) {
+    fprintf(stderr, "Can't open input file!\n\n");
+    exit(1);
+  }
+
+  float tmp1;
   char tmp;
   for (int i = 0; i < (problem_size * 2); i++) {
     fscanf(fp, "%f ", &tmp1);
@@ -71,26 +77,26 @@ double trapezoidal_riemann(double *data, int size) {
 int main(int argc, char *argv[]){
   printf("\n");
 
-  if (argc != 3) {
-    printf("Worng number of arguments.\nYou may execute with number of processors and problem size.\n\n./riemann number_processors problem_size\n\n");
+  if (argc < 2) {
+    printf("Worng number of arguments.\nYou may execute with problem size.\n\n./riemann problem_size\n\nYou can also execute with data file\n\n./riemann problem_size filename\n\n");
     return -1;
   }
 
-  int number_processors = atoi(argv[1]);
-  int problem_size = atoi(argv[2]);
-
-  printf("Number of processors: %d\n", number_processors);
-  printf("Problem size: %d\n", problem_size);
-
+  int problem_size = atoi(argv[1]);
 
   char *filename = "data.dat";
 
-  create_random_file(filename, problem_size);
+  if (argc == 2) 
+    create_random_file(filename, problem_size);
 
+  else
+    filename = argv[2];
+    
   double * data = malloc(sizeof(double) * problem_size * 2);
 
   read_data_from_file(filename, problem_size, data);
 
+  printf("Problem size: %d\n", problem_size);
   print_data(data, problem_size);
 
   double result;
