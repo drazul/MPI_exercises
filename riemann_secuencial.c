@@ -85,7 +85,7 @@ int main(int argc, char *argv[]){
 
   char *filename = "data.dat";
 
-  //create_random_file(filename, problem_size);
+  create_random_file(filename, problem_size);
 
   double * data = malloc(sizeof(double) * problem_size * 2);
 

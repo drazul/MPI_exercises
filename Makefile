@@ -1,7 +1,9 @@
 NAME = riemann
 
-all:
-	gcc  riemann.c -std=c99 -ggdb -o $(NAME)
+all: secuencial
+
+secuencial:
+	gcc  riemann_secuencial.c -std=c99 -ggdb -o $(NAME)
 
 run:
 	./$(NAME) 1 10
