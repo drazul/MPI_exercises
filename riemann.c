@@ -7,9 +7,15 @@ void create_random_file(char* filename, int problem_size) {
   FILE *fp;
   fp = fopen(filename, "w");
 
-  for (int i = 0; i < problem_size; i++)
-    fprintf(fp, "%f %f", (double) rand() / (double) rand(), (double)rand() / (double)rand());
+  double tmp = 0, previous = 0;
 
+  for (int i = 0; i < problem_size; i++){
+    while (tmp <= previous)
+      tmp = (double) rand() / (double) rand();
+    previous = tmp;
+    fprintf(fp, "%f %f ", tmp, (double)rand() / (double)rand());
+
+  }
   fclose(fp);
 }
 
@@ -18,18 +24,17 @@ void read_data_from_file(char* filename, int problem_size, double *data) {
   fp = fopen(filename, "r");
   float tmp1, tmp2;
   char tmp;
-  for (int i = 0; i < problem_size;) {
-    fscanf(fp, "%f %f", &tmp1, &tmp2);
-    data[i++] = tmp1;
-    data[i++] = tmp2;
+  for (int i = 0; i < (problem_size * 2); i++) {
+    fscanf(fp, "%f ", &tmp1);
+    data[i] = tmp1;
   }
 
   fclose(fp);
 }
 
 void print_data(double *data, int size) {
-  for (int i = 0; i < size;)
-    printf("%f %f\n", data[i++], data[i++]);
+  for (int i = 0; i < size ; i++)
+    printf("%f %f\n", data[i * 2], data[i * 2 + 1]);
 }
 
 double left_riemann(double *data, int size) {
