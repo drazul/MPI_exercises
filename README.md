@@ -20,7 +20,11 @@ S<sub>trapezoidal</sub> = Sumatorio(i=1, i=N-1) ((f(x<sub>i-1</sub>) + f(x<sub>i
 
 #Enunciado.
 
-Desarrollar un programa en C con MPI que calcule de forma paralela, en un entorno con P procesadores,  los valores S<sub>izquierda</sub>, S<sub>derecha</sub> y S<sub>trapezoidal</sub> de una función definida por puntos almacenada en un fichero secuencial *data.dat* de N puntos, y muestre el tiempo que ha tardado en ejecutarse. El fichero almacena los puntos por parejas [x<sub>0</sub>,f(x<sub>0</sub>),x<sub>1</sub>,f(x<sub>1</sub>), ...., ,x<sub>N-1</sub>,f(X<sub>N-1</sub>)}. Todos los valores son de tipo double.
+Desarrollar un programa en C con MPI que calcule de forma paralela, en un entorno con P procesadores,  los valores S<sub>izquierda</sub>, S<sub>derecha</sub> y S<sub>trapezoidal</sub> de una función definida por puntos almacenada en un fichero secuencial *data.dat* de N puntos, y muestre el tiempo que ha tardado en ejecutarse. 
+
+El fichero almacena los puntos por parejas [x<sub>0</sub>,f(x<sub>0</sub>),x<sub>1</sub>,f(x<sub>1</sub>), ...., ,x<sub>N-1</sub>,f(X<sub>N-1</sub>)}. 
+
+Todos los valores son de tipo double.
 
 #Nota
 

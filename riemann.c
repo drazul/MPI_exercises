@@ -8,31 +8,32 @@ void create_random_file(char* filename, int problem_size) {
   fp = fopen(filename, "w");
 
   for (int i = 0; i < problem_size; i++)
-    fprintf(fp, "%d%d", rand() % 10, rand() % 10);
+    fprintf(fp, "%f %f", (double) rand() / (double) rand(), (double)rand() / (double)rand());
 
   fclose(fp);
 }
 
-void read_data_from_file(char* filename, int problem_size, int *data) {
+void read_data_from_file(char* filename, int problem_size, double *data) {
   FILE *fp;
   fp = fopen(filename, "r");
-
+  float tmp1, tmp2;
   char tmp;
-  for (int i = 0; i < (problem_size * 2); i++) {
-    tmp = fgetc(fp);
-    data[i] = atoi(&tmp);
+  for (int i = 0; i < problem_size;) {
+    fscanf(fp, "%f %f", &tmp1, &tmp2);
+    data[i++] = tmp1;
+    data[i++] = tmp2;
   }
 
   fclose(fp);
 }
 
-void print_data(int *data, int size) {
+void print_data(double *data, int size) {
   for (int i = 0; i < size;)
-    printf("%d %d\n", data[i++], data[i++]);
+    printf("%f %f\n", data[i++], data[i++]);
 }
 
-int left_riemann(int *data, int size) {
-  int result = 0;
+double left_riemann(double *data, int size) {
+  double result = 0;
   for (int i = 1; i < (size - 1); i++){
     // result += f(xi-1) * (xi - xi-1);
     result += data[i - 1] * (data[i] - data[i - 2]);
@@ -40,8 +41,8 @@ int left_riemann(int *data, int size) {
   return result;
 }
 
-int right_riemann(int *data, int size) {
-  int result = 0;
+double right_riemann(double *data, int size) {
+  double result = 0;
   for (int i = 1; i < (size - 1); i++){
     // result += f(xi) * (xi - xi-1);
     result += data[i + 1] * (data[i] - data[i - 2]);
@@ -49,8 +50,8 @@ int right_riemann(int *data, int size) {
   return result;
 }
 
-int trapezoidal_riemann(int *data, int size) {
-  int result = 0;
+double trapezoidal_riemann(double *data, int size) {
+  double result = 0;
   for (int i = 1; i < (size - 1); i++){
     // result += ((f(xi - 1) + f(xi)) / 2) * (xi - xi-1);
     result += ((data[i - 1] + data[i + 1]) / 2) * 
@@ -77,22 +78,22 @@ int main(int argc, char *argv[]){
 
   create_random_file(filename, problem_size);
 
-  int * data = malloc(sizeof(int) * problem_size * 2);
+  double * data = malloc(sizeof(double) * problem_size * 2);
 
   read_data_from_file(filename, problem_size, data);
 
   print_data(data, problem_size);
 
-  int result;
+  double result;
 
   result = left_riemann(data, problem_size);
-  printf("Left Riemann: %d\n", result);
+  printf("Left Riemann: %f\n", result);
 
   result = right_riemann(data, problem_size);
-  printf("Right Riemann: %d\n", result);
+  printf("Right Riemann: %f\n", result);
 
   result = trapezoidal_riemann(data, problem_size);
-  printf("Trapezoidal Riemann: %d\n", result);
+  printf("Trapezoidal Riemann: %f\n", result);
 }
 
 
