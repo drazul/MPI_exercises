@@ -33,8 +33,10 @@ void read_data_from_file(char* filename, int problem_size, double *data) {
 }
 
 void print_data(double *data, int size) {
+  printf("\nx(i)\t\tf(x(i))\n");
   for (int i = 0; i < size ; i++)
-    printf("%f %f\n", data[i * 2], data[i * 2 + 1]);
+    printf("%f\t%f\n", data[i * 2], data[i * 2 + 1]);
+  printf("\n");
 }
 
 double left_riemann(double *data, int size) {
@@ -66,6 +68,7 @@ double trapezoidal_riemann(double *data, int size) {
 }
 
 int main(int argc, char *argv[]){
+  printf("\n");
 
   if (argc != 3) {
     printf("Worng number of arguments.\nYou may execute with number of processors and problem size.\n\n./riemann number_processors problem_size\n\n");
@@ -99,6 +102,10 @@ int main(int argc, char *argv[]){
 
   result = trapezoidal_riemann(data, problem_size);
   printf("Trapezoidal Riemann: %f\n", result);
+
+  printf("\n");
+
+  return 0;
 }
 
 
