@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 void create_random_file(char* filename, int problem_size) {
   FILE *fp;
@@ -100,6 +101,7 @@ int main(int argc, char *argv[]){
   print_data(data, problem_size);
 
   double result;
+  clock_t time = clock ();
 
   result = left_riemann(data, problem_size);
   printf("Left Riemann: %f\n", result);
@@ -110,7 +112,9 @@ int main(int argc, char *argv[]){
   result = trapezoidal_riemann(data, problem_size);
   printf("Trapezoidal Riemann: %f\n", result);
 
-  printf("\n");
+  time = clock() - time;
+
+  printf("\nTime spent: %f seconds\n\n", ((double) time / CLOCKS_PER_SEC));
 
   return 0;
 }
