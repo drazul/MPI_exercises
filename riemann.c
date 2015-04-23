@@ -43,7 +43,8 @@ double left_riemann(double *data, int size) {
   double result = 0;
   for (int i = 1; i < (size - 1); i++){
     // result += f(xi-1) * (xi - xi-1);
-    result += data[i - 1] * (data[i] - data[i - 2]);
+    result += data[(i * 2) - 1] * (data[(i * 2)] - data[(i * 2) - 2]);
+
   }
   return result;
 }
@@ -52,7 +53,7 @@ double right_riemann(double *data, int size) {
   double result = 0;
   for (int i = 1; i < (size - 1); i++){
     // result += f(xi) * (xi - xi-1);
-    result += data[i + 1] * (data[i] - data[i - 2]);
+    result += data[(i * 2) + 1] * (data[(i * 2)] - data[(i * 2) - 2]);
   }
   return result;
 }
@@ -61,8 +62,8 @@ double trapezoidal_riemann(double *data, int size) {
   double result = 0;
   for (int i = 1; i < (size - 1); i++){
     // result += ((f(xi - 1) + f(xi)) / 2) * (xi - xi-1);
-    result += ((data[i - 1] + data[i + 1]) / 2) * 
-            (data[i] - data[i -2]);
+    result += ((data[(i * 2) - 1] + data[(i * 2) + 1]) / 2) * 
+            (data[(i * 2)] - data[(i * 2) - 2]);
   }
   return result;
 }
@@ -84,7 +85,7 @@ int main(int argc, char *argv[]){
 
   char *filename = "data.dat";
 
-  create_random_file(filename, problem_size);
+  //create_random_file(filename, problem_size);
 
   double * data = malloc(sizeof(double) * problem_size * 2);
 

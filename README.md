@@ -16,7 +16,7 @@ S<sub>derecha</sub> = Sumatorio(i=1, i=N-1) (f(x<sub>i</sub>) * (x<sub>i</sub> -
 
 **Suma de Riemann trapezoidal.**
 
-S<sub>trapezoidal</sub> = Sumatorio(i=1, i=N-1) ((f(x<sub>i-1</sub>) + f(x<sub>i</sub>)/2) * (x<sub>i</sub> - x <sub>i-1</sub>))
+S<sub>trapezoidal</sub> = Sumatorio(i=1, i=N-1) ((f(x<sub>i-1</sub>) + f(x<sub>i</sub>))/2) * (x<sub>i</sub> - x <sub>i-1</sub>))
 
 #Enunciado.
 
