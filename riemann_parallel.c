@@ -72,7 +72,8 @@ int main(int argc, char** argv) {
 
   MPI_Bcast(&data, problem_size * 2, MPI_DOUBLE, 0, MPI_COMM_WORLD);
   
-  clock_t time = clock ();
+  clock_t time = clock();
+  double time_mpi = MPI_Wtime();
 
   for(int i = id + 1; i < problem_size; i += processors_number) {
     left_riemann += data[(i * 2) - 1] * (data[(i * 2)] - data[(i * 2) - 2]);
@@ -86,13 +87,15 @@ int main(int argc, char** argv) {
   MPI_Reduce(&trapezoidal_riemann, &total_trapezoidal_riemann, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 
   time = clock() - time;
+  time_mpi = MPI_Wtime() - time_mpi;
 
   if(id == 0) {
-    printf("\nTotal\nLeft Riemann: %f\n", total_left_riemann);
+    printf("\nLeft Riemann: %f\n", total_left_riemann);
     printf("Right Riemann: %f\n", total_right_riemann);
     printf("Trapezoidal Riemann: %f\n\n", total_trapezoidal_riemann);
 
-    printf("\nTime spent: %f seconds\n\n", ((double) time / CLOCKS_PER_SEC));
+    printf("\nTime spent (c measurement): %f seconds", ((double) time / CLOCKS_PER_SEC));
+    printf("\nTime spent (mpi measurement): %f seconds\n\n", time_mpi);
   }
 
   MPI_Finalize();
