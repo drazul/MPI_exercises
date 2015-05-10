@@ -3,16 +3,16 @@ NAME = riemann
 all: sequential
 
 sequential:
-	gcc  riemann_sequential.c -std=c99 -ggdb -o $(NAME)
+	gcc  riemann_sequential.c -std=c99 -ggdb -o $(NAME)_sequential
 
 parallel:
-	mpic  riemann_parallel.c -o $(NAME)
+	mpicc  riemann_parallel.c -std=c99 -o $(NAME)_parallel
 
 run_sequential:
-	./$(NAME) 10
+	./$(NAME)_sequential 10 data.dat
 
 run_parallel:
-	 mpirun -np 2 riemann 10 
+	 mpirun -np 10 $(NAME)_parallel 10 data.dat
 
 clean:
 	rm -rf $(NAME) data.dat

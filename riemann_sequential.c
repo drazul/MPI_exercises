@@ -48,7 +48,7 @@ void print_data(double *data, int size) {
 
 double left_riemann(double *data, int size) {
   double result = 0;
-  for (int i = 1; i < (size - 1); i++){
+  for (int i = 1; i < size; i++){
     // result += f(xi-1) * (xi - xi-1);
     result += data[(i * 2) - 1] * (data[(i * 2)] - data[(i * 2) - 2]);
 
@@ -58,7 +58,7 @@ double left_riemann(double *data, int size) {
 
 double right_riemann(double *data, int size) {
   double result = 0;
-  for (int i = 1; i < (size - 1); i++){
+  for (int i = 1; i < size; i++){
     // result += f(xi) * (xi - xi-1);
     result += data[(i * 2) + 1] * (data[(i * 2)] - data[(i * 2) - 2]);
   }
@@ -67,7 +67,7 @@ double right_riemann(double *data, int size) {
 
 double trapezoidal_riemann(double *data, int size) {
   double result = 0;
-  for (int i = 1; i < (size - 1); i++){
+  for (int i = 1; i < size; i++){
     // result += ((f(xi - 1) + f(xi)) / 2) * (xi - xi-1);
     result += ((data[(i * 2) - 1] + data[(i * 2) + 1]) / 2) * 
             (data[(i * 2)] - data[(i * 2) - 2]);
@@ -97,8 +97,8 @@ int main(int argc, char *argv[]){
 
   read_data_from_file(filename, problem_size, data);
 
-  printf("Problem size: %d\n", problem_size);
-  print_data(data, problem_size);
+  //printf("Problem size: %d\n", problem_size);
+  //print_data(data, problem_size);
 
   double result;
   clock_t time = clock ();
