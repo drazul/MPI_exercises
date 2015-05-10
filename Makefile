@@ -1,4 +1,7 @@
 NAME = riemann
+FILENAME = data.dat
+PROBLEM_SIZE = 10000
+PROCESS_NUMBER = 4
 
 all: sequential parallel
 
@@ -11,13 +14,13 @@ parallel:
 	mpicc  riemann_parallel.c -std=c99 -o $(NAME)_parallel
 
 run_sequential_without_file:
-	./$(NAME)_sequential 10
+	./$(NAME)_sequential $(PROBLEM_SIZE)
 
 run_sequential:
-	./$(NAME)_sequential 10 data.dat
+	./$(NAME)_sequential $(PROBLEM_SIZE) data.dat
 
 run_parallel:
-	 mpirun -np 10 $(NAME)_parallel 10 data.dat
+	 mpirun -np $(PROCESS_NUMBER) $(NAME)_parallel $(PROBLEM_SIZE) data.dat
 
 clean:
 	rm -rf $(NAME)_sequential $(NAME)_parallel data.dat
