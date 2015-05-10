@@ -73,7 +73,54 @@ MPI}
 
 \newpage
 
-\section{Introducción}
+\section{Enunciado}
+
+
+Conocida una función f(x) mediante una secuencia de N pares $(x_{i},f(x_{i}))$ , tal que $x_{i - 1} < x_{i}$.\\
+
+Se conoce como:\\
+
+\textbf{Suma de Riemann por la izquierda.}\\
+
+$S_{izquierda} = \sum_{i=1}^{N -1} f(x_{i - 1}) * (x_{i} - x_{i - 1})$\\
+
+\textbf{Suma de Riemann por la derecha.}\\
+
+$S_{derecha} = \sum_{i=1}^{N -1} f(x_{i}) * (x_{i} - x_{i - 1})$\\
+
+\textbf{Suma de Riemann trapezoidal.}\\
+
+$S_{izquierda} = \sum_{i=1}^{N -1} \frac{f(x_{i - 1}) + f(x_{i})}{2} * (x_{i} - x_{i - 1})$\\
+\\
+
+
+Desarrollar un programa en C con MPI que calcule de forma paralela, en un entorno con P procesadores, los valores $S_{izquierda}$, $S_{derecha}$ y $S_{trapezoidal}$ de una función definida por puntos almacenada en un fichero secuencial \textit{data.dat} de N puntos, y muestre el tiempo que ha tardado en ejecutarse. \\
+
+El fichero almacena los puntos por parejas [$x_{0},f(x_{0}),x_{1},f(x_{1}), ..., ,x_{N - 1},f(x_{N - 1})$]. \\
+
+Todos los valores son de tipo \textit{double}.\\
+
+\textbf{Nota}\\
+
+Realizar la implementación mediante un proceso inicial que lee el fichero y distribuye los datos entre los demás procesos, para finalmente mostrar el resultado.\\
+
+El tiempo de ejecución a calcular, será el transcurrido a partir de recibir todos los procesos sus datos.\\
+
+\subsection{Entrega}
+
+\begin{itemize}
+\item \textbf{Documento Teoria.pdf} En este documento se explicita los pasos necesarios para realizar el algoritmos paralelo: división, comunicaciones, agrupación y asignación. También se incluirá una breve descripción del algoritmo y su implementación.
+
+\item \textbf{Fichero fuente Riemann.c}  Este fichero deberá de compilarse \textit{mpicc -o nombre\_del\_ejecutable Riemann.c}  sin errores para poder ejecutar sin error el siguiente comando: \textit{mpirun -np numero\_procesadores nombre\_del\_ejecutable tamaño\_del\_problema Fichero.dat}. El resultado deberá ser:
+\begin{itemize}
+\item Sizq = Valor
+\item  Sder = Valor
+\item  Strap = Valor
+\item  Tiempo máximo de ejecución = Valor segundos.
+\end{itemize}
+
+\end{itemize}
+
 
 %\begin{figure}[!h]
 %\begin{center}
